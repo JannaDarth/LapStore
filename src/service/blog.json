@@ -1,0 +1,13 @@
+{
+    "blogs":[
+        {
+            "id": 1,
+            "date":"Jan 13, 2023",
+            "cover":"https://dlcdnwebimgs.asus.com/files/media/c997f08b-4e17-466c-bb02-8d2d75760327/v1/assets/image/proart/article_cover.jpg",
+            "headline":"Why ASUS Zenbook Is the Right Choice for Digital Nomads",
+            "intro":"As technology makes it easier and easier to stay connected with clients and co-workers from anywhere in the world, a generation of digital nomads has emerged.Large swaths of the workforce have recently embraced professional life on the go, turning the traditional idea of a workplace on its head. Digital nomads are freelancers who use technology to work virtually, enabling a “nomadic” lifestyle, meaning the office could be at home, at a coffee shop, or on the beach.The past few years have accelerated the appetite for remote work and improved upon the technology that powers it. The result: Digital nomadism is catching on in a wide range of fields, from tutoring and translating to art and writing to crypto and stock trading. For these professionals, career opportunities and performance hinge on the right tech tools.A digital nomad’s most important piece of work equipment is their laptop. Here’s a closer look at features to look for to enable your roving lifestyle.",
+            "part1":"The Best Laptop for: Online Educators and Tutors"
+
+        }
+    ]
+}
