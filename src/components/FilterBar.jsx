@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
-import { useState, useEffect, useRef } from "react";
-import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
+import { useState, useEffect } from "react";
+import Slider from "rc-slider";
+import "rc-slider/assets/index.css";
 
 function FilterBar({ allProducts, dispatch, sortingOrder }) {
   const uniqueMemories = [
@@ -39,9 +39,21 @@ function FilterBar({ allProducts, dispatch, sortingOrder }) {
     ),
   ];
 
-  const minPrice=Math.floor(Math.min(...allProducts.map((a)=>a.best_price.slice(1,a.best_price.indexOf("@")))));
-  const maxPrice=Math.ceil(Math.max(...allProducts.map((a)=>a.best_price.slice(1,a.best_price.indexOf("@")))));
-  const [minMaxValues,setMinMaxValues]=useState([]);
+  const minPrice = Math.floor(
+    Math.min(
+      ...allProducts.map((a) =>
+        a.best_price.slice(1, a.best_price.indexOf("@"))
+      )
+    )
+  );
+  const maxPrice = Math.ceil(
+    Math.max(
+      ...allProducts.map((a) =>
+        a.best_price.slice(1, a.best_price.indexOf("@"))
+      )
+    )
+  );
+
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [filters, setFilters] = useState({
     memory: [],
@@ -71,6 +83,8 @@ function FilterBar({ allProducts, dispatch, sortingOrder }) {
                 return prod[key]
                   .substring(0, prod[key].indexOf('"'))
                   .includes(f);
+              case "best_price" :
+                return f[0]< +prod[key].slice(1,prod[key].indexOf("@")) && f[1]> +prod[key].slice(1,prod[key].indexOf("@"))
               default:
                 return prod[key].includes(f);
             }
@@ -130,6 +144,8 @@ function FilterBar({ allProducts, dispatch, sortingOrder }) {
       cpu: [],
       storage: [],
       destination: [],
+      best_price:[],
+
     });
     [...document.querySelectorAll('input[type="checkbox"]')].map(
       (input) => (input.checked = false)
@@ -141,15 +157,11 @@ function FilterBar({ allProducts, dispatch, sortingOrder }) {
   }, [filters]);
 
   useEffect(() => {
-    console.log(filters);
-  }, [minMaxValues]);
-
-  useEffect(() => {
-    filteredProducts.length &&
-      dispatch({
-        type: "ASSIGNFILTERS",
-        payload: filteredProducts,
-      });
+    // filteredProducts.length &&
+    dispatch({
+      type: "ASSIGNFILTERS",
+      payload: filteredProducts,
+    });
   }, [filteredProducts]);
 
   useEffect(() => {
@@ -158,10 +170,10 @@ function FilterBar({ allProducts, dispatch, sortingOrder }) {
 
   useEffect(() => {
     Object.values(filters).some((value) => value.length > 0) &&
-    dispatch({
-      type: "CURRENTPAGE",
-      payload: 1,
-    });
+      dispatch({
+        type: "CURRENTPAGE",
+        payload: 1,
+      });
   }, [filters]);
 
   return (
@@ -169,7 +181,17 @@ function FilterBar({ allProducts, dispatch, sortingOrder }) {
       <form onSubmit={(e) => e.preventDefault()}>
         <div className="pricePanel">
           <label>Price range</label>
-          <Slider  onChange={(e)=>setMinMaxValues(e)} className="custom_slicer" defaultValue={[minPrice,maxPrice]} max={maxPrice} min={minPrice} style={{width:"90%"}} reverse={false} range={true} />
+          <Slider
+            onChange={(e) => setFilters((filters)=>({...filters,best_price:[e]}))}
+            className="custom_slicer"
+            defaultValue={[minPrice, maxPrice]}
+            max={maxPrice}
+            min={minPrice}
+            style={{ width: "90%" }}
+            reverse={false}
+            range={true}
+            allowCross={false}
+          />
         </div>
         <div className="charPanel">
           <label>Manufacturer</label>
