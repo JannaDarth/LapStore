@@ -6,6 +6,7 @@ const initialState = {
   itemsPerPage: 0,
   sortingOrder: 0,
   currentPage: 1,
+  comparison: [],
 };
 
 export default function Reducer(state = initialState, action) {
@@ -18,8 +19,25 @@ export default function Reducer(state = initialState, action) {
       return { ...state, itemsPerPage: action.payload };
     case "SORTPRODUCTS":
       return { ...state, sortingOrder: action.payload };
+    case "ADDTOCOMPARE":
+      console.log(state.comparison);
+      if (!action.payload) {
+        return { ...state, comparison: [] };
+      }
+      let temp = [];
+      // 5 is the total number of products which user can compare 
+      if (state.comparison.length < 5) {
+        state.comparison.includes(action.payload)
+          ? (temp = state.comparison.filter((a) => a != action.payload))
+          : (temp = [...state.comparison, action.payload]);
+      } else {
+        state.comparison.includes(action.payload)
+          ? (temp = state.comparison.filter((a) => a != action.payload))
+          : (temp = [...state.comparison.slice(0, -1), action.payload]);
+      }
+      return { ...state, comparison: temp,console };
     case "CURRENTPAGE":
-      console.log('current page has been set to:  reducer');
+      console.log("current page has been set to:  reducer");
       return { ...state, currentPage: action.payload };
   }
   return state;

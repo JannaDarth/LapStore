@@ -1,15 +1,23 @@
 import { Link } from "react-router-dom";
+import { useState,useEffect } from "react";
+import { connect } from "react-redux";
 
-function Product({ product }) {
+function Product({ product,dispatch }) {
+  const addToCompare=(id)=>{
+    dispatch({
+      type: "ADDTOCOMPARE",
+      payload: id,
+    });
+  }
   return (
     <div className="productItem">
       <div className="productImage">
         <img src={product.img} alt="laptop pic" />
         <div className="hoverButtons">
           <Link to={`/details/${product.id}`}>Details</Link>
-          <button>Sebet</button>
+          <button>Basket</button>
           <label>
-            <input type="checkbox" /> Compare
+            <input onChange={()=>addToCompare(product.id)} type="checkbox" /> Compare
           </label>
         </div>
       </div>
@@ -28,5 +36,4 @@ function Product({ product }) {
     </div>
   );
 }
-
-export default Product;
+export default connect()(Product);

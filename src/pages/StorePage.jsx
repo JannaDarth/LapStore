@@ -3,9 +3,11 @@ import FilterBar from "../components/FilterBar";
 import Product from "../components/Product";
 import { connect } from "react-redux";
 import Pagination from "../components/Pagination";
+import CompareBar from "../components/CompareBar";
 
 function StorePage({ filteredProducts, itemsPerPage, currentPage }) {
   return (
+    <>
     <section className="storePage container underHeader">
       <div className="filterBar">
         <FilterBar />
@@ -21,6 +23,8 @@ function StorePage({ filteredProducts, itemsPerPage, currentPage }) {
         </div>
       </div>
     </section>
+    <CompareBar/>
+    </>
   );
 }
 const t = (a) => {

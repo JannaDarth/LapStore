@@ -62,7 +62,7 @@ function FilterBar({ allProducts, dispatch, sortingOrder }) {
     cpu: [],
     storage: [],
     destination: [],
-    best_price:[],
+    best_price: [],
   });
 
   const applyFilters = () => {
@@ -83,8 +83,11 @@ function FilterBar({ allProducts, dispatch, sortingOrder }) {
                 return prod[key]
                   .substring(0, prod[key].indexOf('"'))
                   .includes(f);
-              case "best_price" :
-                return f[0]< +prod[key].slice(1,prod[key].indexOf("@")) && f[1]> +prod[key].slice(1,prod[key].indexOf("@"))
+              case "best_price":
+                return (
+                  f[0] < +prod[key].slice(1, prod[key].indexOf("@")) &&
+                  f[1] > +prod[key].slice(1, prod[key].indexOf("@"))
+                );
               default:
                 return prod[key].includes(f);
             }
@@ -144,8 +147,7 @@ function FilterBar({ allProducts, dispatch, sortingOrder }) {
       cpu: [],
       storage: [],
       destination: [],
-      best_price:[],
-
+      best_price: [],
     });
     [...document.querySelectorAll('input[type="checkbox"]')].map(
       (input) => (input.checked = false)
@@ -157,7 +159,6 @@ function FilterBar({ allProducts, dispatch, sortingOrder }) {
   }, [filters]);
 
   useEffect(() => {
-    // filteredProducts.length &&
     dispatch({
       type: "ASSIGNFILTERS",
       payload: filteredProducts,
@@ -182,7 +183,9 @@ function FilterBar({ allProducts, dispatch, sortingOrder }) {
         <div className="pricePanel">
           <label>Price range</label>
           <Slider
-            onChange={(e) => setFilters((filters)=>({...filters,best_price:[e]}))}
+            onChange={(e) =>
+              setFilters((filters) => ({ ...filters, best_price: [e] }))
+            }
             className="custom_slicer"
             defaultValue={[minPrice, maxPrice]}
             max={maxPrice}
@@ -190,7 +193,6 @@ function FilterBar({ allProducts, dispatch, sortingOrder }) {
             style={{ width: "90%" }}
             reverse={false}
             range={true}
-            allowCross={false}
           />
         </div>
         <div className="charPanel">
