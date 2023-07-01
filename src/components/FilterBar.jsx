@@ -54,6 +54,8 @@ function FilterBar({ allProducts, dispatch, sortingOrder }) {
     )
   );
 
+  const [totalValues,setTotalValues]=useState([minPrice, maxPrice]);
+
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [filters, setFilters] = useState({
     memory: [],
@@ -149,9 +151,10 @@ function FilterBar({ allProducts, dispatch, sortingOrder }) {
       destination: [],
       best_price: [],
     });
-    [...document.querySelectorAll('input[type="checkbox"]')].map(
+    [...document.querySelectorAll('.filterPanel input[type="checkbox"]')].map(
       (input) => (input.checked = false)
     );
+    !filters.length&&setTotalValues([minPrice,maxPrice]);
   };
 
   useEffect(() => {
@@ -183,16 +186,21 @@ function FilterBar({ allProducts, dispatch, sortingOrder }) {
         <div className="pricePanel">
           <label>Price range</label>
           <Slider
-            onChange={(e) =>
+          marks={(e)=>console.log(e)}
+            onAfterChange={(e) =>
               setFilters((filters) => ({ ...filters, best_price: [e] }))
             }
+            onChange={(e)=>setTotalValues(e)}
             className="custom_slicer"
-            defaultValue={[minPrice, maxPrice]}
+            defaultValue={totalValues}
             max={maxPrice}
             min={minPrice}
             style={{ width: "90%" }}
             reverse={false}
             range={true}
+            tooltip={true}
+            value={totalValues}
+            // railStyle={{color:"red"}}
           />
         </div>
         <div className="charPanel">

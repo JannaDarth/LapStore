@@ -24,7 +24,7 @@ function PurposeOfUse({ allProducts }) {
   return (
     <section className="purposeArea">
       <div className="container">
-        <ul className="purposeList" onClick={(e) => destinationHandler(e)}>
+        <ul className="purposeList" onMouseOver={(e) => destinationHandler(e)}>
           <li name="Educational">
             <FontAwesomeIcon icon={faBook} />
             <span>Educational</span>

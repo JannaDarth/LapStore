@@ -5,10 +5,11 @@ import { connect } from "react-redux";
 import Pagination from "../components/Pagination";
 import CompareBar from "../components/CompareBar";
 
-function StorePage({ filteredProducts, itemsPerPage, currentPage }) {
+function StorePage({ filteredProducts, itemsPerPage, currentPage,comparison }) {
   return (
     <>
-    <section className="storePage container underHeader">
+    <section>
+      <div className="storePage container" >
       <div className="filterBar">
         <FilterBar />
       </div>
@@ -22,8 +23,10 @@ function StorePage({ filteredProducts, itemsPerPage, currentPage }) {
             ))}
         </div>
       </div>
+      </div>
+      {comparison.length?<CompareBar/>:""}
     </section>
-    <CompareBar/>
+    
     </>
   );
 }
@@ -32,6 +35,7 @@ const t = (a) => {
     filteredProducts: a.filteredProducts,
     itemsPerPage: a.itemsPerPage,
     currentPage: a.currentPage,
+    comparison : a.comparison,
   };
 };
 export default connect(t)(StorePage);

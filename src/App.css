@@ -439,7 +439,7 @@ header form {
 .sliderEbuy h2 {
   position: absolute;
   width: 50%;
-  bottom: 50%;
+  bottom: 30%;
   left: 8%;
   color: var(--headerBLue);
   font-size: 3rem;
@@ -670,9 +670,73 @@ footer label {
 /* COMPARE areaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa */
 
 .compareBar{
-  position: absolute;
+  margin:10px 0;
   width: 100%;
-  height: 250px;
-  background-color: red;
+  height: 175px;
+  background-color: var(--lightBlackLighter);
   opacity: 0.5;
+}
+
+.compareProducts{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding: 10px;
+  gap: 10px;
+}
+
+.compareUnit{
+  text-align: center;
+  width: 25%;
+  height: 100%;
+}
+
+.compareUnit img{
+  width: 140px;
+  object-fit:fill;
+  height: 80px;
+}
+
+.compareShow{position: relative;}
+.compareShowButton{
+  position: absolute;
+  right: -10%;
+  bottom:5%;
+  width:55px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+.compareControls{
+  padding: 5px;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+}
+
+.compareControls button{
+  width:90px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--input);
+  cursor: pointer;
+  color: white;
+  outline: none;
+}
+.compareControls button:hover{
+  background-color: var(--hoverBtn);
+}
+
+.compareWiev table{
+border-collapse: collapse;
+width: 100%;
+}
+
+.compareWiev a{ display: block;
+  text-decoration: none;}
+
+.compareWiev th, .compareWiev td{
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
 }

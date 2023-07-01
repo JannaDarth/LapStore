@@ -32,7 +32,6 @@ function Footer() {
         <div className="rightFoot">
           <ul className="footerNav">
             <Link to="/store">Store</Link>
-            <Link to="/delivery">Delivery</Link>
             <Link to="/blog">Blog</Link>
             <Link to="/about">About us</Link>
           </ul>

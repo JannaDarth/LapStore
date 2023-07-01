@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 import { useState,useEffect } from "react";
 import { connect } from "react-redux";
 
-function Product({ product,dispatch }) {
-  const addToCompare=(id)=>{
+function Product({ product,dispatch,comparison }) {
+  const addToCompare=(item)=>{
     dispatch({
       type: "ADDTOCOMPARE",
-      payload: id,
+      payload: item,
     });
   }
   return (
@@ -17,7 +17,7 @@ function Product({ product,dispatch }) {
           <Link to={`/details/${product.id}`}>Details</Link>
           <button>Basket</button>
           <label>
-            <input onChange={()=>addToCompare(product.id)} type="checkbox" /> Compare
+            <input onChange={()=>addToCompare(product)} type="checkbox" checked={comparison.includes(product)}/> Compare
           </label>
         </div>
       </div>
@@ -36,4 +36,5 @@ function Product({ product,dispatch }) {
     </div>
   );
 }
-export default connect()(Product);
+const t=(a)=>a;
+export default connect(t)(Product);
