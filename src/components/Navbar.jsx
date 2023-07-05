@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMagnifyingGlass,
@@ -8,15 +8,12 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import LoginRegForm from "./LoginRegForm";
-import SearchBar from "./SearchBar";
 
 function Navbar() {
   const [searcModule, setSearchModule] = useState(false);
-  const [regModule,setRegModule]=useState(false);
+  const [regModule, setRegModule] = useState(false);
   const [searchFor, setSearchFor] = useState("");
-  useEffect(()=>{
-    
-  })
+  useEffect(() => {});
   return (
     <header>
       <nav className="container">
@@ -42,38 +39,37 @@ function Navbar() {
           </li>
         </ul>
       </nav>
-      {searcModule &&<SearchBar/>
-        // <form
-        //   onSubmit={(e) => e.preventDefault()}
-        //   style={{ display: !searcModule && "none" }}
-        // >
-        //   <div className="container">
-        //     <div className="searchbar">
-        //       <button onClick={() => console.log(searchFor)}>
-        //         <FontAwesomeIcon icon={faMagnifyingGlass} />
-        //       </button>
-        //       <input
-        //         onChange={(e) => setSearchFor(e.target.value)}
-        //         value={searchFor}
-        //         type="text"
-        //         placeholder="search"
-        //       />
-        //       <button
-        //         type="button"
-        //         onClick={() =>
-        //           searchFor.length
-        //             ? setSearchFor("")
-        //             : setSearchModule((p) => !p)
-        //         }
-        //       >
-        //         <FontAwesomeIcon icon={faXmark} />
-        //       </button>
-        //     </div>
-        //   </div>
-        // </form>
-      }
-      {regModule&&
-      <LoginRegForm/>}
+      {searcModule && (
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          style={{ display: !searcModule && "none" }}
+        >
+          <div className="container">
+            <div className="searchbar">
+              <button onClick={() => console.log(searchFor)}>
+                <FontAwesomeIcon icon={faMagnifyingGlass} />
+              </button>
+              <input
+                onChange={(e) => setSearchFor(e.target.value)}
+                value={searchFor}
+                type="text"
+                placeholder="search"
+              />
+              <button
+                type="button"
+                onClick={() =>
+                  searchFor.length
+                    ? setSearchFor("")
+                    : setSearchModule((p) => !p)
+                }
+              >
+                <FontAwesomeIcon icon={faXmark} />
+              </button>
+            </div>
+          </div>
+        </form>
+      )}
+      {regModule && <LoginRegForm />}
     </header>
   );
 }
