@@ -7,6 +7,8 @@ const initialState = {
   sortingOrder: 0,
   currentPage: 1,
   comparison: [],
+  users: [],
+  profile: "",
 };
 
 export default function Reducer(state = initialState, action) {
@@ -24,7 +26,7 @@ export default function Reducer(state = initialState, action) {
         return { ...state, comparison: [] };
       }
       let temp = [];
-      // 4 is the total number of products which user can compare 
+      // 4 is the total number of products which user can compare
       if (state.comparison.length < 4) {
         state.comparison.includes(action.payload)
           ? (temp = state.comparison.filter((a) => a != action.payload))
@@ -34,11 +36,16 @@ export default function Reducer(state = initialState, action) {
           ? (temp = state.comparison.filter((a) => a != action.payload))
           : (temp = [...state.comparison.slice(0, -1), action.payload]);
       }
-      return { ...state, comparison: temp,console };
+      return { ...state, comparison: temp, console };
     case "CURRENTPAGE":
       return { ...state, currentPage: action.payload };
-      case "EMPTYCOMPARE":
-        return{...state,comparison:[]}
+    case "EMPTYCOMPARE":
+      return { ...state, comparison: [] };
+    case "ADDNEWUSER":
+      return { ...state, users: [...state.users, action.payload] };
+    case "LOGOUT":
+      console.log(state.users);
+      return { ...state, profile: action.payload ? action.payload : "" };
   }
   return state;
 }

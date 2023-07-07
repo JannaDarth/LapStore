@@ -10,6 +10,7 @@ import Details from './pages/Details'
 import Basket from './pages/Basket'
 import Footer from './components/Footer'
 import Compare from './pages/Compare'
+import Account from './pages/Account'
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
       <Route path="/details/:id" element={<Details/>}/>
       <Route path="/basket" element={<Basket/>}/>
       <Route path="/compare" element={<Compare/>}/>
+      <Route path="/profile" element={<Account/>}/>
     </Routes>
     <Footer/>
     </>

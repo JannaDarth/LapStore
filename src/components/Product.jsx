@@ -15,7 +15,7 @@ function Product({ product,dispatch,comparison }) {
         <img src={product.img} alt="laptop pic" />
         <div className="hoverButtons">
           <Link to={`/details/${product.id}`}>Details</Link>
-          <button>Basket</button>
+          <button>Add</button>
           <label>
             <input onChange={()=>addToCompare(product)} type="checkbox" checked={comparison.includes(product)}/> Compare
           </label>
@@ -29,7 +29,7 @@ function Product({ product,dispatch,comparison }) {
         </p>
         <div className="bestPrice">
           <p>Best offer at</p>
-          <h3>{product.best_price.split("@")[1]}</h3>
+          <h4>{product.best_price.split("@")[1]}</h4>
         </div>
         <span>{product.best_price.split("@")[0]}</span>
       </div>

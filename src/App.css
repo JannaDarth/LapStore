@@ -37,8 +37,21 @@ body {
   margin-top: 60px;
 }
 
+.grayScale {
+  backdrop-filter: grayscale(50%);
+  background-color: transparent;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
 input:focus {
   outline: none;
+}
+
+button:disabled,
+button:disabled:hover {
+  background-color: grey;
 }
 
 .btn_style {
@@ -54,6 +67,11 @@ input:focus {
 
 .btn_style:hover {
   background-color: var(--hoverBtn);
+}
+
+.swal2-popup {
+  background-color: var(--headerBLue);
+  color: var(--orangeLogo) !important;
 }
 
 /* NAVIGATION ///////////////////////////////////////////////////////////////////////////*/
@@ -119,7 +137,7 @@ nav ul {
   left: 50%;
   bottom: -67%;
   width: 0;
-  height: 2px;
+  height: 1px;
   background-color: var(--orangeLogo);
   margin: 0 auto;
   transition: width 0.3s ease-out;
@@ -130,7 +148,13 @@ nav ul {
   color: var(--orangeLogo);
 }
 
-.userbar li:hover * {
+.userbar li span {
+  padding: 1px;
+  width: max-content;
+  height: max-content;
+}
+
+.userbar li span :hover {
   color: var(--hoverBtn);
 }
 
@@ -181,13 +205,40 @@ header form {
   cursor: pointer;
 }
 
+.userDropDown {
+  position: relative;
+}
+
+.loggedUser {
+  position: absolute;
+  left: -15%;
+  top: 120%;
+  background-color: var(--input);
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.loggedUser li {
+  margin-bottom: 5px;
+  border-bottom: 1px solid grey;
+}
+
+.loggedUser li:hover,
+.loggedUser a:hover {
+  color: var(--orangeLogo);
+}
+
 /* REGister FORM ////////////////////////////////////////////////////////*/
 
 .form-container {
-  max-width: 400px;
-  margin: 0 auto;
+  position: absolute;
+  width: 400px;
+  top: 10%;
+  left: 38%;
   padding: 20px;
-  background-color: var(--temporary);
+  background-color: var(--headerBLue);
   border-radius: 10px;
 }
 
@@ -215,10 +266,11 @@ header form {
 .form-container a {
   display: block;
   text-align: center;
+  cursor: pointer;
 }
 
 .form-container a:hover {
-  color: var(--headerBLue);
+  color: var(--orangeLogo);
 }
 
 /*/////////////////////////// STORE  PAGE and product ///////////////////////////////////////////////////*/
@@ -257,7 +309,29 @@ header form {
 }
 .textCenter {
   text-align: center;
-  height: max-content;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.textCenter h3 {
+  margin: 10px 0;
+}
+
+.textCenter p {
+  line-height: 130%;
+}
+
+.textCenter span {
+  color: var(--temporary);
+}
+
+.bestPrice {
+  margin: 10px 0;
+}
+.textCenter h4 {
+  color: var(--orangeLogo);
+  cursor: pointer;
 }
 
 .productImage {
@@ -268,8 +342,8 @@ header form {
 .hoverButtons {
   position: absolute;
   background-color: var(--lightBlackLighter);
-  width: 100.25%;
-  bottom: 2%;
+  width: 100.45%;
+  bottom: 1%;
   left: 0;
   height: 0;
   opacity: 0;
@@ -278,6 +352,30 @@ header form {
   align-items: center;
   visibility: hidden;
   transition: 0.5s;
+}
+
+.hoverButtons label {
+  padding: 1px;
+  font-size: 0.8rem;
+}
+
+.hoverButtons input {
+  margin-right: 2px;
+  vertical-align: middle;
+  height: 12px;
+}
+
+.hoverButtons button {
+  background-color: var(--headerBLue);
+  border: none;
+  padding: 2px;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+.hoverButtons button:hover {
+  background-color: var(--hoverBtn);
 }
 
 .productItem:hover .hoverButtons {
@@ -303,17 +401,17 @@ header form {
   margin: 15px 20px;
 }
 
-.filterPanel form > div{
+.filterPanel form > div {
   margin-bottom: 25px;
   border-bottom: 1px solid gray;
   padding-bottom: 5px;
 }
 
-.custom_slicer{
+.custom_slicer {
   margin-top: 15px;
 }
 
-.pricePanel{
+.pricePanel {
   margin-bottom: 10px !important;
   border-bottom: none !important;
 }
@@ -368,7 +466,6 @@ header form {
   display: flex;
   align-items: center;
 }
-
 
 /* PAGINATION ///////////////////////////////// */
 
@@ -666,56 +763,57 @@ footer label {
   padding-left: 4px;
 }
 
-
 /* COMPARE areaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa */
 
-.compareBar{
-  margin:10px 0;
+.compareBar {
+  margin: 10px 0;
   width: 100%;
   height: 175px;
   background-color: var(--lightBlackLighter);
   opacity: 0.5;
 }
 
-.compareProducts{
-  display:flex;
-  justify-content:center;
-  align-items:center;
+.compareProducts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 10px;
   gap: 10px;
 }
 
-.compareUnit{
+.compareUnit {
   text-align: center;
   width: 25%;
   height: 100%;
 }
 
-.compareUnit img{
+.compareUnit img {
   width: 140px;
-  object-fit:fill;
+  object-fit: fill;
   height: 80px;
 }
 
-.compareShow{position: relative;}
-.compareShowButton{
+.compareShow {
+  position: relative;
+}
+.compareShowButton {
   position: absolute;
   right: -10%;
-  bottom:5%;
-  width:55px;
+  bottom: 5%;
+  width: 55px;
   height: 35px;
   border-radius: 50%;
 }
 
-.compareControls{
+.compareControls {
   padding: 5px;
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
-.compareControls button{
-  width:90px;
+.compareControls button {
+  width: 90px;
   height: 20px;
   border-radius: 50%;
   background-color: var(--input);
@@ -723,19 +821,22 @@ footer label {
   color: white;
   outline: none;
 }
-.compareControls button:hover{
+.compareControls button:hover {
   background-color: var(--hoverBtn);
 }
 
-.compareWiev table{
-border-collapse: collapse;
-width: 100%;
+.compareWiev table {
+  border-collapse: collapse;
+  width: 100%;
 }
 
-.compareWiev a{ display: block;
-  text-decoration: none;}
+.compareWiev a {
+  display: block;
+  text-decoration: none;
+}
 
-.compareWiev th, .compareWiev td{
+.compareWiev th,
+.compareWiev td {
   padding: 8px;
   text-align: left;
   border-bottom: 1px solid #ddd;

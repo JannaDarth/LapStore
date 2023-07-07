@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,16 +9,22 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import LoginRegForm from "./LoginRegForm";
+import Register from "./Register";
+import DropUser from "./DropUser";
 
-function Navbar() {
+function Navbar({ profile }) {
   const [searcModule, setSearchModule] = useState(false);
   const [regModule, setRegModule] = useState(false);
+  const [register, setRegister] = useState(false);
   const [searchFor, setSearchFor] = useState("");
-  useEffect(() => {});
+  const [dropUser, setDropUser] = useState(profile.length ? true : false);
   return (
     <header>
-      <nav className="container">
-        <NavLink className="logo" to="/">
+      <nav
+        className="container"
+        style={{ pointerEvents: regModule ? "none" : "inherit" }}
+      >
+        <NavLink onClick={() => window.scroll(0, 0)} className="logo" to="/">
           Lap<span>Store</span>
         </NavLink>
         <ul className="navbar">
@@ -26,16 +33,28 @@ function Navbar() {
           <NavLink to="/about">About Us</NavLink>
         </ul>
         <ul className="userbar">
-          <li onClick={() => setRegModule((p) => !p)}>
-            <FontAwesomeIcon icon={faUser} />
+          <li
+            className="userDropDown"
+            onClick={() =>
+              profile.length ? setDropUser(!dropUser) : setRegModule((p) => !p)
+            }
+          >
+            <span>
+              <FontAwesomeIcon icon={faUser} />
+            </span>
+            {dropUser && <DropUser />}
           </li>
           <li>
             <NavLink to="/basket">
-              <FontAwesomeIcon icon={faCartShopping} />
+              <span>
+                <FontAwesomeIcon icon={faCartShopping} />
+              </span>
             </NavLink>
           </li>
           <li onClick={() => setSearchModule((p) => !p)}>
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
+            <span>
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </span>
           </li>
         </ul>
       </nav>
@@ -69,9 +88,26 @@ function Navbar() {
           </div>
         </form>
       )}
-      {regModule && <LoginRegForm />}
+      {regModule && (
+        <div onClick={() => setRegModule(!regModule)} className="grayScale">
+          {!register && (
+            <LoginRegForm
+              setRegModule={setRegModule}
+              setRegister={setRegister}
+            />
+          )}
+          {register && (
+            <Register setRegister={setRegister} setRegModule={setRegModule} />
+          )}
+        </div>
+      )}
     </header>
   );
 }
 
-export default Navbar;
+const mapStateToProps = (state) => {
+  return {
+    profile: state.profile,
+  };
+};
+export default connect(mapStateToProps)(Navbar);
