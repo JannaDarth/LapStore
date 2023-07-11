@@ -40,7 +40,7 @@ function LoginRegForm({ setRegModule, setRegister, users, dispatch }) {
           iconColor: "rgb(222, 90, 16)",
           timer: 800,
         });
-    loginMatch && dispatch({ type: "LOGOUT", payload: email });
+    loginMatch && dispatch({ type: "LOGINOUT", payload: email });
     loginMatch &&
       setTimeout(() => {
         setRegModule(false);

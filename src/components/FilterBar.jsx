@@ -54,7 +54,7 @@ function FilterBar({ allProducts, dispatch, sortingOrder }) {
     )
   );
 
-  const [totalValues,setTotalValues]=useState([minPrice, maxPrice]);
+  const [totalValues, setTotalValues] = useState([minPrice, maxPrice]);
 
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [filters, setFilters] = useState({
@@ -154,7 +154,7 @@ function FilterBar({ allProducts, dispatch, sortingOrder }) {
     [...document.querySelectorAll('.filterPanel input[type="checkbox"]')].map(
       (input) => (input.checked = false)
     );
-    !filters.length&&setTotalValues([minPrice,maxPrice]);
+    !filters.length && setTotalValues([minPrice, maxPrice]);
   };
 
   useEffect(() => {
@@ -179,18 +179,19 @@ function FilterBar({ allProducts, dispatch, sortingOrder }) {
         payload: 1,
       });
   }, [filters]);
-
+  console.log(totalValues)
   return (
     <section className="filterPanel">
       <form onSubmit={(e) => e.preventDefault()}>
         <div className="pricePanel">
           <label>Price range</label>
+          <p>{totalValues[0]+" - "+totalValues[1]}</p>
           <Slider
-          marks={(e)=>console.log(e)}
             onAfterChange={(e) =>
               setFilters((filters) => ({ ...filters, best_price: [e] }))
             }
-            onChange={(e)=>setTotalValues(e)}
+            
+            onChange={(e) => setTotalValues(e)}
             className="custom_slicer"
             defaultValue={totalValues}
             max={maxPrice}
@@ -198,9 +199,7 @@ function FilterBar({ allProducts, dispatch, sortingOrder }) {
             style={{ width: "90%" }}
             reverse={false}
             range={true}
-            tooltip={true}
             value={totalValues}
-            // railStyle={{color:"red"}}
           />
         </div>
         <div className="charPanel">

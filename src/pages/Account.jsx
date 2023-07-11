@@ -1,13 +1,16 @@
-import React from 'react'
+import React from "react";
+import { connect } from "react-redux";
 
-function Account() {
+function Account({ profile }) {
   return (
-    <section className='underHeader'>
-        <div>
-            Here lies the all the info on your accunt 
-        </div>
+    <section className="underHeader">
+      <div>This is an account for {profile}</div>
     </section>
-  )
+  );
 }
-
-export default Account
+const mapStateToProps = (state) => {
+  return {
+    profile: state.profile,
+  };
+};
+export default connect(mapStateToProps)(Account);

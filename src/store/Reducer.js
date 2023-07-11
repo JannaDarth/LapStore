@@ -42,8 +42,9 @@ export default function Reducer(state = initialState, action) {
     case "EMPTYCOMPARE":
       return { ...state, comparison: [] };
     case "ADDNEWUSER":
-      return { ...state, users: [...state.users, action.payload] };
-    case "LOGOUT":
+      console.log(action.payload)
+      return { ...state, users: [...state.users, action.payload],profile:action.payload.email };
+    case "LOGINOUT":
       console.log(state.users);
       return { ...state, profile: action.payload ? action.payload : "" };
   }

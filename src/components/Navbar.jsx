@@ -22,7 +22,7 @@ function Navbar({ profile }) {
     <header>
       <nav
         className="container"
-        style={{ pointerEvents: regModule ? "none" : "inherit" }}
+        style={{ pointerEvents: regModule ? "none" : "inherit",filter:regModule?"blur(4px)":"inherit"}}
       >
         <NavLink onClick={() => window.scroll(0, 0)} className="logo" to="/">
           Lap<span>Store</span>

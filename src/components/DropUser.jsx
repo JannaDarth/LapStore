@@ -9,7 +9,7 @@ function DropUser({dispatch}) {
         <Link to={"/profile"}>Profile</Link>
       </li>
       <li>Settings</li>
-      <li onClick={()=>dispatch({type:"LOGOUT"})}>Log out</li>
+      <li onClick={()=>dispatch({type:"LOGINOUT"})}>Log out</li>
     </ul>
   );
 }
