@@ -24,7 +24,8 @@ function StorePage({ filteredProducts, itemsPerPage, currentPage,comparison }) {
         </div>
       </div>
       </div>
-      {comparison.length?<CompareBar/>:""}
+      <div className="compareFixed">
+      {comparison.length?<CompareBar/>:""}</div>
     </section>
     
     </>

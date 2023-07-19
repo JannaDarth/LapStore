@@ -72,7 +72,7 @@ function Navbar({ profile }) {
                 onChange={(e) => setSearchFor(e.target.value)}
                 value={searchFor}
                 type="text"
-                placeholder="search"
+                placeholder="Search"
               />
               <button
                 type="button"

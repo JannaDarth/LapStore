@@ -7,6 +7,7 @@ const initialState = {
   sortingOrder: 0,
   currentPage: 1,
   comparison: [],
+  newsSubscribers: [],
   users: [],
   profile: "",
 };
@@ -36,17 +37,24 @@ export default function Reducer(state = initialState, action) {
           ? (temp = state.comparison.filter((a) => a != action.payload))
           : (temp = [...state.comparison.slice(0, -1), action.payload]);
       }
-      return { ...state, comparison: temp, console };
+      return { ...state, comparison:temp};
     case "CURRENTPAGE":
       return { ...state, currentPage: action.payload };
     case "EMPTYCOMPARE":
       return { ...state, comparison: [] };
     case "ADDNEWUSER":
-      console.log(action.payload)
-      return { ...state, users: [...state.users, action.payload],profile:action.payload.email };
+      return {
+        ...state,
+        users: [...state.users, action.payload],
+        profile: action.payload.email,
+      };
     case "LOGINOUT":
-      console.log(state.users);
       return { ...state, profile: action.payload ? action.payload : "" };
+    case "ADDSUBSCRIBER":
+      return {
+        ...state,
+        newsSubscribers: [...state.newsSubscribers, action.payload],
+      };
   }
   return state;
 }

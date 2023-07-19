@@ -63,8 +63,8 @@ input[type="checkbox"] {
 
 input[type="checkbox"]::before {
   content: "";
-  width: 7px;
-  height: 7px;
+  width: 9px;
+  height: 9px;
   transform: scale(0);
   transition: 120ms transform ease-in-out;
   box-shadow: inset 1em 1em var(--orangeLogo);
@@ -75,7 +75,7 @@ input[type="checkbox"]:checked::before {
   transform: scale(1);
 }
 
-input[type="checkbox"]:focus {
+input[type="checkbox"]:focus:not(.hoverButtons input) {
   border-color: var(--orangeLogo);
 }
 
@@ -202,7 +202,7 @@ header form {
   display: block;
   margin: 0 auto;
   width: 100%;
-  padding: 10px 30px;
+  padding: 10px 40px;
   border: none;
   background-color: var(--input);
   border-radius: 10px;
@@ -342,27 +342,23 @@ header form {
 .textCenter {
   text-align: center;
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
+  row-gap: 10px;
 }
 
-.textCenter h3 {
-  margin: 10px 0;
-}
-
-.textCenter p {
+.productParameters {
   line-height: 130%;
+  min-height: 70px;
+  display: flex;
+  align-items: center;
 }
 
 .textCenter span {
-  color: var(--temporary);
+  color: var(--orangeLogo);
 }
 
-.bestPrice {
-  margin: 10px 0;
-}
 .textCenter h4 {
-  color: var(--orangeLogo);
+  color: grey;
   cursor: pointer;
 }
 
@@ -384,6 +380,7 @@ header form {
   align-items: center;
   visibility: hidden;
   transition: 0.5s;
+  font-size: 0.8rem;
 }
 
 .hoverButtons label {
@@ -391,16 +388,16 @@ header form {
   justify-content: center;
   align-items: center;
   padding: 1px;
-  font-size: 0.8rem;
 }
 
 .hoverButtons input {
   margin-right: 5px;
   border-color: var(--orangeLogo);
+  opacity: 0.6;
 }
 
 .hoverButtons button {
-  background-color: var(--headerBLue);
+  background-color: transparent;
   border: none;
   padding: 2px;
   border-radius: 5px;
@@ -408,8 +405,9 @@ header form {
   cursor: pointer;
 }
 
-.hoverButtons button:hover {
-  background-color: var(--hoverBtn);
+.hoverButtons button:hover,
+.hoverButtons a:hover {
+  color: var(--orangeLogo);
 }
 
 .productItem:hover .hoverButtons {
@@ -419,7 +417,6 @@ header form {
 }
 
 .productItem:hover .productImage img {
-  /* transform: scaleX(-1); */
   transform: rotateY(180deg);
 }
 
@@ -445,18 +442,28 @@ header form {
   margin-top: 5px;
 }
 
+.rc-slider-rail {
+  background-color: var(--lightBlackLighter) !important;
+}
+
 .rc-slider-track {
   background-color: var(--orangeLogo) !important;
 }
 
 .rc-slider-handle {
+  width: 3px !important;
   border-radius: 0% !important;
-  border: solid 1px var(--orangeLogo) !important;
+  border: none !important;
   box-shadow: none !important;
-  /* opacity: 0.5 !important; */
-  background-color: var(--lightBlackLighter) !important;
+  background-color: var(--orangeLogo) !important;
 }
 
+.rc-slider-handle:hover {
+  border-color: var(--orangeLogo) !important;
+}
+.rc-slider-handle:focus {
+  width: 10px !important;
+}
 .pricePanel {
   margin-bottom: 10px !important;
   border-bottom: none !important;
@@ -503,6 +510,7 @@ header form {
 .charPanel label:not(:nth-of-type(1)) {
   display: flex;
   align-items: center;
+  margin-bottom: 8px;
 }
 
 .pricePanel p {
@@ -746,6 +754,11 @@ footer input {
 .footerInputArea {
   position: relative;
   margin-top: 10px;
+  z-index: 0;
+}
+
+.footerInputArea label {
+  color: grey;
 }
 
 footer button {
@@ -754,11 +767,15 @@ footer button {
   top: 25%;
   left: inherit;
   right: 0;
-  background-color: var(--orangeLogo);
+  background-color: inherit;
   border: none;
   cursor: pointer;
   padding: 10px;
   border-radius: 10px;
+}
+
+footer button:hover {
+  background-color: var(--hoverBtn);
 }
 
 .leftFoot,
@@ -797,7 +814,6 @@ footer .logo {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* margin-bottom: 10px; */
 }
 
 footer label {
@@ -807,12 +823,19 @@ footer label {
 
 /* COMPARE areaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa */
 
-.compareBar {
-  margin: 10px 0;
+.compareFixed {
   width: 100%;
-  height: 175px;
+  z-index: 2;
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+}
+
+.compareBar {
+  width: 100%;
   background-color: var(--lightBlackLighter);
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
 .compareProducts {
@@ -826,7 +849,6 @@ footer label {
 .compareUnit {
   text-align: center;
   width: 25%;
-  height: 100%;
 }
 
 .compareUnit img {
@@ -839,32 +861,44 @@ footer label {
   position: relative;
 }
 .compareShowButton {
-  position: absolute;
-  right: -10%;
-  bottom: 5%;
-  width: 55px;
-  height: 35px;
-  border-radius: 50%;
+  position: fixed;
+  right: -15px;
+  bottom: 20px;
+  width: 70px;
+  height: 20px;
+  border: none;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: var(--lightBlackLighter);
+  cursor: pointer;
+  color: white;
+  outline: none;
+  transform: rotate(270deg);
 }
 
 .compareControls {
-  padding: 5px;
+  position: absolute;
+  top: -19.5%;
+  width: 100%;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: space-evenly;
 }
 
 .compareControls button {
-  width: 90px;
+  width: 70px;
   height: 20px;
-  border-radius: 50%;
-  background-color: var(--input);
+  border: none;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: var(--lightBlackLighter);
   cursor: pointer;
   color: white;
   outline: none;
 }
-.compareControls button:hover {
-  background-color: var(--hoverBtn);
+.compareControls button:hover,
+.compareShowButton:hover {
+  background-color: var(--orangeLogo);
+  opacity: 0.8;
 }
 
 .compareWiev table {

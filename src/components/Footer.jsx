@@ -11,8 +11,15 @@ import {
   faInstagramSquare,
   faTelegram,
 } from "@fortawesome/free-brands-svg-icons";
-import { memo } from "react";
-function Footer() {
+import { memo, useState } from "react";
+import { connect } from "react-redux";
+function Footer({dispatch}) {
+  const [email,setEmail]=useState("");
+  const submitNewSub=(e)=>{
+    e.preventDefault();
+    dispatch({type:"ADDSUBSCRIBER",payload:email.trim()});
+    setEmail("");
+  }
   return (
     <footer>
       <div className="container">
@@ -21,12 +28,12 @@ function Footer() {
             Lap<span>Store</span>
           </Link>
           <form
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={(e)=>submitNewSub(e)}
             className="footerInputArea"
           >
             <label>Subscribe to not miss special offers</label>
-            <input type="email" placeholder="email" />
-            <button>Join</button>
+            <input onChange={(e)=>setEmail(e.target.value)} value={email} type="email" placeholder="email" />
+            <button>Add</button>
           </form>
         </div>
         <div className="rightFoot">
@@ -69,4 +76,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default connect() (Footer);

@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-function Product({ product,dispatch,comparison }) {
-  const addToCompare=(item)=>{
+function Product({ product, dispatch, comparison }) {
+  const addToCompare = (item) => {
     dispatch({
       type: "ADDTOCOMPARE",
       payload: item,
     });
-  }
+  };
   return (
     <div className="productItem">
       <div className="productImage">
@@ -17,13 +17,18 @@ function Product({ product,dispatch,comparison }) {
           <Link to={`/details/${product.id}`}>Details</Link>
           <button>Add</button>
           <label>
-            <input onChange={()=>addToCompare(product)} type="checkbox" checked={comparison.includes(product)}/> Compare
+            <input
+              onChange={() => addToCompare(product)}
+              type="checkbox"
+              checked={comparison.includes(product)}
+            />{" "}
+            Compare
           </label>
         </div>
       </div>
       <div className="textCenter">
-        <h3 title={product.title}>{product.title.slice(0,20)}..</h3>
-        <p>
+        <h3 title={product.title}>{product.title.slice(0, 20)}..</h3>
+        <p className="productParameters">
           {product.cpu}/{product.memory}/{product.storage}/{product.screen}/
           {product.weight}
         </p>
@@ -36,5 +41,5 @@ function Product({ product,dispatch,comparison }) {
     </div>
   );
 }
-const t=(a)=>a;
+const t = (a) => a;
 export default connect(t)(Product);

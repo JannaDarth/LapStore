@@ -59,7 +59,7 @@ function Pagination({ dispatch, productLength }) {
       </div>
       <div className="pagiSide">
         <ul>
-          <li
+          <li style={{opacity:totalPages<2||currentPage==1?"0.3":"inherit"}}
             onClick={() =>
               setCurrentPage(currentPage - 1 > 1 ? currentPage - 1 : 1)
             }
@@ -67,7 +67,7 @@ function Pagination({ dispatch, productLength }) {
             &#8592;
           </li>
           {pages}
-          <li onClick={() => setCurrentPage(currentPage+1<totalPages ? currentPage+1 : totalPages)}>&#8594;</li>
+          <li style={{opacity:totalPages<2||currentPage==totalPages?"0.3":"inherit"}} onClick={() => setCurrentPage(currentPage+1<totalPages ? currentPage+1 : totalPages)}>&#8594;</li>
         </ul>
       </div>
     </section>

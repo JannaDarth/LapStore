@@ -1,7 +1,6 @@
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 function Compare({comparison}) {
-  console.log(comparison)
     return (
     <section className="underHeader">
       <div className="container compareWiev">

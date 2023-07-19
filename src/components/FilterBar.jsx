@@ -53,8 +53,9 @@ function FilterBar({ allProducts, dispatch, sortingOrder }) {
       )
     )
   );
-
-  const [totalValues, setTotalValues] = useState([minPrice, maxPrice]);
+  const priceStep=50;
+  const defaultMinMaxValues=[minPrice-(minPrice%priceStep),maxPrice-(maxPrice%priceStep)+priceStep];
+  const [totalValues, setTotalValues] = useState(defaultMinMaxValues);
 
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [filters, setFilters] = useState({
@@ -154,7 +155,7 @@ function FilterBar({ allProducts, dispatch, sortingOrder }) {
     [...document.querySelectorAll('.filterPanel input[type="checkbox"]')].map(
       (input) => (input.checked = false)
     );
-    !filters.length && setTotalValues([minPrice, maxPrice]);
+    !filters.length && setTotalValues(defaultMinMaxValues);
   };
 
   useEffect(() => {
@@ -179,7 +180,6 @@ function FilterBar({ allProducts, dispatch, sortingOrder }) {
         payload: 1,
       });
   }, [filters]);
-  console.log(totalValues)
   return (
     <section className="filterPanel">
       <form onSubmit={(e) => e.preventDefault()}>
@@ -194,12 +194,13 @@ function FilterBar({ allProducts, dispatch, sortingOrder }) {
             onChange={(e) => setTotalValues(e)}
             className="custom_slicer"
             defaultValue={totalValues}
-            max={maxPrice}
-            min={minPrice}
+            max={defaultMinMaxValues[1]}
+            min={defaultMinMaxValues[0]}
             style={{ width: "90%" }}
             reverse={false}
             range={true}
             value={totalValues}
+            step={priceStep}
           />
         </div>
         <div className="charPanel">
